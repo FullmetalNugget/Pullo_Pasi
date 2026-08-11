@@ -1,34 +1,38 @@
 using UnityEngine;
-using System.Collections;
 
 public class movement : MonoBehaviour
 {
-
     public float speed;
+
+    private PlayerControls controls;
+    private Rigidbody rb;
 
     void Awake()
     {
-
+        rb = GetComponent<Rigidbody>();
+        controls = new PlayerControls();
     }
+
+    void OnEnable() => controls.Enable();
+    void OnDisable() => controls.Disable();
 
     void FixedUpdate()
     {
-
-        if (Input.GetKey("a"))
+        if (controls.Player.MoveLeft.IsPressed())
         {
-            GetComponent<Rigidbody>().AddForce(-Vector3.right * speed * Time.deltaTime);
+            rb.AddForce(-Vector3.right * speed * Time.deltaTime);
         }
-        if (Input.GetKey("d"))
+        if (controls.Player.MoveRight.IsPressed())
         {
-            GetComponent<Rigidbody>().AddForce(Vector3.right * speed * Time.deltaTime);
+            rb.AddForce(Vector3.right * speed * Time.deltaTime);
         }
-        if (Input.GetKey("w"))
+        if (controls.Player.MoveUp.IsPressed())
         {
-            GetComponent<Rigidbody>().AddForce(-Vector3.down * speed * Time.deltaTime);
+            rb.AddForce(-Vector3.down * speed * Time.deltaTime);
         }
-        if (Input.GetKey("s"))
+        if (controls.Player.MoveDown.IsPressed())
         {
-            GetComponent<Rigidbody>().AddForce(Vector3.down * speed * Time.deltaTime);
+            rb.AddForce(Vector3.down * speed * Time.deltaTime);
         }
     }
 }
