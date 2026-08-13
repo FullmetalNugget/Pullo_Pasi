@@ -4,14 +4,14 @@ public class Collectible : MonoBehaviour
 {
     public int value = 1; // esim. pisteet, kolikot, energia
 
-    private void OnTriggerEnter(Collider collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             // Lisää pisteet tai muu toiminto
             Destroy(gameObject);
             Debug.Log("Objekt lähdemýs");
-            PlayerInventory inventory = collision.GetComponent<PlayerInventory>();
+            PlayerInventory inventory = other.GetComponent<PlayerInventory>();
             if (inventory != null)
             {
                 inventory.Add(value);
