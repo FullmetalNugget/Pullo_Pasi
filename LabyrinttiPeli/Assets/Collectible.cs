@@ -2,22 +2,20 @@ using UnityEngine;
 
 public class Collectible : MonoBehaviour
 {
-    public int value = 1; // esim. pisteet, kolikot, energia
+    public int value = 1;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            // Lisää pisteet tai muu toiminto
             Destroy(gameObject);
-            Debug.Log("Objekt lähdemýs");
+            Debug.Log("Objekt lähdemys");
+
             PlayerInventory inventory = other.GetComponent<PlayerInventory>();
             if (inventory != null)
             {
                 inventory.Add(value);
             }
-
-            // Tuhoa esine
         }
     }
 }
